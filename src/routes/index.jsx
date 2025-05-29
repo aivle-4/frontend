@@ -11,6 +11,11 @@ const ProtectedRoute = () => {
   return isAuthenticated ? <Outlet/> : <Navigate to="/login" replace/>
 }
 
+const NotFoundRoute = () => {
+  const {isAuthenticated} = useSelector((state) => state.auth)
+  return isAuthenticated ? <Navigate to="/" replace/> : <Navigate to="/login" replace/>
+}
+
 function AppRoutes() {
   return (
     <Routes>
@@ -19,11 +24,13 @@ function AppRoutes() {
       <Route element={<ProtectedRoute/>}>
         <Route path="/" element={<Home/>}/>
         <Route path="/books">
+          <Route index element={<h1>올바른 경로가 아닙니다</h1>}/>
           <Route path=":id" element={<BookDetail/>}/>
           <Route path="write" element={<BookForm/>}/>
           <Route path=":id/edit" element={<BookForm/>}/>
         </Route>
       </Route>
+      <Route path="*" element={<NotFoundRoute/>}/>
     </Routes>
   )
 }
