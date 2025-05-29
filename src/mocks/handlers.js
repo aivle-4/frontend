@@ -1,10 +1,10 @@
-import { http, HttpResponse } from 'msw'
+import {http, HttpResponse} from 'msw'
 
 export const handlers = [
   // 회원가입
   http.post('/api/member/new', async ({request}) => {
     const {loginId, password} = await request.json()
-    
+
     if (!loginId || !password) {
       return HttpResponse.json({
         isSuccess: false,
@@ -22,7 +22,7 @@ export const handlers = [
   // 로그인
   http.post('/api/member/login', async ({request}) => {
     const {loginId, password} = await request.json()
-    
+
     if (!loginId || !password) {
       return HttpResponse.json({
         isSuccess: false,
@@ -44,6 +44,14 @@ export const handlers = [
   http.get('/api/books', ({request}) => {
     const url = new URL(request.url)
     const title = url.searchParams.get('title')
+
+    if (!title) {
+      return HttpResponse.json({
+        isSuccess: false,
+        message: '제목을 입력해주세요.',
+        result: null
+      }, {status: 400})
+    }
 
     return HttpResponse.json({
       isSuccess: true,
@@ -97,7 +105,7 @@ export const handlers = [
   // 책 생성
   http.post('/api/books', async ({request}) => {
     const data = await request.json()
-    
+
     if (!data.title || !data.content) {
       return HttpResponse.json({
         isSuccess: false,
@@ -169,7 +177,7 @@ export const handlers = [
   // 표지 생성
   http.post('/api/books/cover', async ({request}) => {
     const {title, content} = await request.json()
-    
+
     if (!title || !content) {
       return HttpResponse.json({
         isSuccess: false,
@@ -191,7 +199,7 @@ export const handlers = [
   http.get('/api/books/keyword', ({request}) => {
     const url = new URL(request.url)
     const keyword = url.searchParams.get('keyword')
-    
+
     if (!keyword) {
       return HttpResponse.json({
         isSuccess: false,
