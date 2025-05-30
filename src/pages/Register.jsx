@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { authApi } from '../api/auth'
+import emptyCover from '../assets/empty_cover.png'
 import {
   Container,
   Typography,
@@ -25,13 +26,14 @@ function Register() {
       }
     } catch (error) {
       alert('회원가입에 실패했습니다.')
-      console.error('회원가입 오류:', error)
+      console.error('회원가입 오류:', error.response?.data || error)
     }
   }
 
   return (
     <Container maxWidth="xs">
-      <Box sx={{ mt: 8, textAlign: 'center' }}>      
+      <Box sx={{ mt: 8, textAlign: 'center' }}>
+        <img src={emptyCover} alt="로고" width={100} height={100}/>      
         <Typography variant="h5" mt={2}>회원가입</Typography>
         <Typography color="textSecondary" mb={3}>내 책 리스트와 함께 시작하세요</Typography>
         <form onSubmit={handleSubmit}>
