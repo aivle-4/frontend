@@ -100,7 +100,7 @@ const EditButton = ({bookId}) => {
       size="large"
       onClick={() => navigate(`/${bookId}/edit`)}
     >
-      수정
+    수정
     </Button>
   );
 }
@@ -109,10 +109,13 @@ const DeleteButton = ({bookId}) => {
   const navigate = useNavigate();
   const handleDelete = async () => {
     try {
+      const confirmed = window.confirm("정말로 이 책을 삭제하시겠습니까?");
+      if (!confirmed) return;
       await booksApi.deleteBook(bookId);
+      window.alert("삭제가 완료되었습니다.");
       navigate('/');
     } catch (error) {
-      console.error("Failed to delete book:", error);
+      window.alert("책 삭제에 실패했습니다. 다시 시도해주세요.");
     }
   };
 
@@ -134,7 +137,11 @@ const BookOverview = ({book}) => {
     !book ? <p>Loading...</p> :
     // Display book details
     <Box sx={{ padding: 2, border: '1px solid #ccc', borderRadius: 2, width: '100%' }}>
-      <Grid container spacing={2} sx={{ width: '100%' }}>
+      <Grid
+        container
+        spacing={2}
+        sx={{ width: '100%', gap: 5 }} // gap 추가
+      >
         <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Box
             component="img"
@@ -146,7 +153,7 @@ const BookOverview = ({book}) => {
         <Grid item xs={12} md={8}>
           <h2>{book.title}</h2>
           <p>저자: {book.author}</p>
-          <p>등록일: {book.createdAt} 최종 수정: {book.updatedAt}</p>
+          <p>등록일: {book.createdAt}   최종 수정: {book.updatedAt}</p>
           <p>{book.description}</p>
         </Grid>
       </Grid>
