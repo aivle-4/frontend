@@ -37,6 +37,7 @@ const BookDetail = () => {
         <BookDetailHeader book={bookDetail} />
         <Box sx={{ minHeight: '100vh', backgroundColor: '#cfe8fc', padding: 2 }}>
           <BookOverview book={bookDetail}></BookOverview>
+          <BookContent book={bookDetail} />
         </Box>
       </Container>
     </React.Fragment>
@@ -131,6 +132,18 @@ const DeleteButton = ({bookId}) => {
   );
 }
 
+const BookContent = ({book}) => {
+  return (
+    <Box sx={{ padding: 2, border: '1px solid #ccc', borderRadius: 2, width: '100%' }}>
+      <Typography gutterBottom variant="h5" component="div" sx={{ fontWeight: 'bold' }}>
+        책 내용
+      </Typography>
+      <Typography variant="body2">
+          {book ? book.content : "책 로드 중..."}
+      </Typography>
+    </Box>
+  );
+}
 
 const BookOverview = ({book}) => {
   return (
