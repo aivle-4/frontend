@@ -1,7 +1,7 @@
-import { Container, Typography } from '@mui/material'
-import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { booksApi } from '../api/books'
+import {Container, Typography} from '@mui/material'
+import {useEffect, useState} from 'react'
+import {useNavigate, useParams} from 'react-router-dom'
+import {booksApi} from '../api/books'
 import BookFormFields from '../components/BookFormFields'
 import ErrorContainer from '../components/ErrorContainer'
 
@@ -29,7 +29,7 @@ function BookForm({mode}) {
         setFormData({title, author, content, coverImageUrl})
         setError(null)
       } catch (error) {
-        setError('책 정보를 가져오는데 실패했습니다.')
+        setError(`책 정보를 가져오는데 실패했습니다.\n${error.response?.status} : ${error.response?.data?.message || '알 수 없는 오류가 발생했습니다.'}`)
         setFormData({...initialData})
       }
     } else {
