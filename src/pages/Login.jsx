@@ -3,6 +3,14 @@ import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import {authApi} from '../api/auth'
 import {login} from '../store/authSlice'
+import {
+  Container,
+  Typography,
+  TextField,
+  Button,
+  Link,
+  Box
+} from '@mui/material'
 
 function Login() {
   const [loginId, setLoginId] = useState('')
@@ -27,28 +35,43 @@ function Login() {
   }
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            type="text"
+    <Container maxWidth="xs">
+      <Box sx={{ mt: 8, textAlign: 'center' }}>   
+        <Typography variant="h5" mt={2}>내 책 리스트</Typography>
+        <Typography color="textSecondary" mb={3}>다시 오신 것을 환영합니다</Typography>
+        <form onSubmit={handleSubmit}>
+          <TextField
+            fullWidth
+            label="이메일"
+            placeholder="example@email.com"
+            margin="normal"
             value={loginId}
             onChange={(e) => setLoginId(e.target.value)}
-            placeholder="아이디"
           />
-        </div>
-        <div>
-          <input
+          <TextField
+            fullWidth
+            label="비밀번호"
             type="password"
+            placeholder="비밀번호를 입력하세요"
+            margin="normal"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="비밀번호"
           />
-        </div>
-        <button type="submit">로그인</button>
-      </form>
-    </div>
+          <Button
+            fullWidth
+            variant="contained"
+            type="submit"
+            sx={{ mt: 2 }}
+          >
+            로그인
+          </Button>
+        </form>
+        <Typography variant="body2" mt={2}>
+          아직 계정이 없으신가요?{' '}
+          <Link href="/register">회원가입</Link>
+        </Typography>
+      </Box>
+    </Container>
   )
 }
 
