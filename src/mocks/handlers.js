@@ -91,7 +91,7 @@ export const handlers = [
       isSuccess: true,
       message: '성공입니다.',
       result: {
-        bookId: params.bookId,
+        bookId: 1,
         author: '작가1',
         title: '책 제목 예시',
         content: '이 책의 본문 내용이 여기에 들어갑니다.…',
