@@ -35,7 +35,7 @@ const BookDetail = () => {
       <CssBaseline />
       <Container maxWidth="lg">
         <BookDetailHeader book={bookDetail} />
-        <Box sx={{ minHeight: '100vh', backgroundColor: '#cfe8fc', padding: 2 }}>
+        <Box sx={{ minHeight: '100vh', backgroundColor: '#fff', padding: 2 }}>
           <BookOverview book={bookDetail}></BookOverview>
           <BookContent book={bookDetail} />
         </Box>
@@ -47,7 +47,7 @@ const BookDetail = () => {
 const BookDetailHeader = ({book}) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar color="primary" sx={{ boxShadow: 1 }} position="sticky">
+      <AppBar sx={{ boxShadow: 1, bgcolor: '#fff', color: '#222', boderBottom:  '1px solid #eee'}} position="sticky">
         <Toolbar sx={{ position: "relative" }}>
           <GoBackButton />
           <Typography
@@ -84,7 +84,21 @@ const GoBackButton = () => {
       size="large"
       edge="start"
       aria-label="go back"
-      sx={{ mr: 10 }}
+      sx={{
+        bgcolor: '#fff',         // 배경 흰색
+        color: '#222', 
+        fontWeight: 600,
+        fontSize: '1rem',
+        px: 1.5,
+        py: 1,
+        border: '1px solid #eee',
+        borderRadius: 2,
+        boxShadow: 3,  
+        textTransform: 'none',
+        '&:hover': {
+          backgroundColor: '#f5f5f5',
+        },
+      }}
       onClick={() => navigate('/')}
     >
       목록으로 돌아가기
@@ -96,9 +110,18 @@ const EditButton = ({bookId}) => {
   const navigate = useNavigate();
   return (
     <Button
-      variant="contained"
-      color="primary"
+      variant="outlined"
+      color="inherit"
       size="large"
+      sx = {{
+        borderColor: '#1976d2',
+        color: '#1976d2',
+        '&:hover': {
+          borderColor: '#115293',
+          color: '#115293',
+          backgroundColor: 'transparent'
+        },
+      }}
       onClick={() => navigate(`/${bookId}/edit`)}
     >
     수정
@@ -122,9 +145,19 @@ const DeleteButton = ({bookId}) => {
 
   return (
     <Button
-      variant="contained"
-      color="secondary"
+      variant="outlined"
+      color="inherit"
       size="large"
+      sx={{
+        color: '#d32f2f',         // 글자색 빨강
+        borderColor: '#d32f2f',   // 테두리색 빨강
+        ml: 1,
+        '&:hover': {
+          color: '#9a0007',
+          borderColor: '#9a0007',
+          backgroundColor: 'transparent'
+        }
+      }}
       onClick={handleDelete}
     >
       삭제
