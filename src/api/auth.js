@@ -1,6 +1,6 @@
 import api from './axios'
 
-const BASE_URL = '/member'
+const BASE_URL = '/members'
 
 export const authApi = {
   register: (data) => api.post(`${BASE_URL}/new`, data),

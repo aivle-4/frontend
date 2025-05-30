@@ -2,7 +2,7 @@ import {http, HttpResponse} from 'msw'
 
 export const handlers = [
   // 회원가입
-  http.post('/api/member/new', async ({request}) => {
+  http.post('/api/members/new', async ({request}) => {
     const {loginId, password} = await request.json()
 
     if (!loginId || !password) {
@@ -20,7 +20,7 @@ export const handlers = [
   }),
 
   // 로그인
-  http.post('/api/member/login', async ({request}) => {
+  http.post('/api/members/login', async ({request}) => {
     const {loginId, password} = await request.json()
 
     if (!loginId || !password) {
