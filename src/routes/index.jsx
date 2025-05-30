@@ -23,8 +23,7 @@ function AppRoutes() {
       <Route path="/register" element={<Register/>}/>
       <Route element={<ProtectedRoute/>}>
         <Route path="/" element={<Home/>}/>
-        <Route path="/books">
-          <Route index element={<h1>올바른 경로가 아닙니다</h1>}/>
+        <Route path="/">
           <Route path=":id" element={<BookDetail/>}/>
           <Route path="write" element={<BookForm/>}/>
           <Route path=":id/edit" element={<BookForm/>}/>
