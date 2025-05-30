@@ -64,7 +64,7 @@ function Home() {
   const fetchBooks = async() => {
       try{
         const response = await booksApi.getBooks(title);
-        setBooks(response.data);
+        setBooks(response.data.result);
 
       } catch(error){
           console.error('책 불러오기 실패 :', error);
@@ -140,17 +140,17 @@ function Home() {
         gap: '16px'
       }}>
         {books.map((book) => (
-          <div key={book.id} style={{
+          <div key={book.bookId} style={{
             border: "1px solid black",
             margin: "10px",
             padding: "10px",
             borderRadius: "10px"
           }}>
 
-            <img
+            {/* <img
               src={book.coverImageUrl}
               alt={`${book.title} 표지`}
-            ></img>
+            ></img> */}
 
             <strong><p style={{
               fontSize: "25px"
