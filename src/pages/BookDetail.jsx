@@ -14,7 +14,7 @@ import Typography from "@mui/material/Typography";
 
 
 const BookDetail = () => {
-  const {bookId} = useParams();
+  const {id:bookId} = useParams();
   const [bookDetail, setBookDetail] = useState();
 
   useEffect(() => {
