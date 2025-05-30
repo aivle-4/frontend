@@ -21,17 +21,24 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await authApi.login({loginId, password})
-      if (response?.data?.isSuccess) {
-        dispatch(login({
-          user: response.data.result.memberId,
-          token: 'access-token'
-        }))
-        navigate('/')
-      }
-    } catch (error) {
-      console.error('로그인 실패:', error)
+    const response = await authApi.login({ loginId, password })
+    
+    if (response?.data?.isSuccess) {
+      const memberId = response.data.result.memberId
+
+      dispatch(login({
+        token: memberId
+      }))
+
+      // token에 memberId 저장
+      localStorage.setItem('token', memberId)
+
+      navigate('/')
     }
+  } catch (error) {
+    console.error('로그인 실패:', error)
+    alert('로그인에 실패했습니다.')
+  }
   }
 
   return (
