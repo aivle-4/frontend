@@ -1,5 +1,5 @@
-import {useSelector} from 'react-redux'
-import {Navigate, Outlet, Route, Routes} from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Navigate, Outlet, Route, Routes } from 'react-router-dom'
 import BookDetail from '../pages/BookDetail'
 import BookForm from '../pages/BookForm'
 import Home from '../pages/Home'
@@ -25,8 +25,8 @@ function AppRoutes() {
         <Route path="/" element={<Home/>}/>
         <Route path="/">
           <Route path=":id" element={<BookDetail/>}/>
-          <Route path="write" element={<BookForm/>}/>
-          <Route path=":id/edit" element={<BookForm/>}/>
+          <Route path="write" element={<BookForm mode="create"/>}/>
+          <Route path=":id/edit" element={<BookForm mode="edit"/>}/>
         </Route>
       </Route>
       <Route path="*" element={<NotFoundRoute/>}/>

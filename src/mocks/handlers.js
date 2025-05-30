@@ -1,4 +1,4 @@
-import {http, HttpResponse} from 'msw'
+import { http, HttpResponse } from 'msw'
 
 export const handlers = [
   // 회원가입
@@ -63,14 +63,14 @@ export const handlers = [
             title: '토지',
             author: '작가1',
             createdAt: '2025-05-29T10:15:30',
-            coverImageUrl: 'url'
+            coverImageUrl: 'https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788975044946.jpg'
           },
           {
             bookId: 2,
             title: '백설공주',
             author: '작가2',
             createdAt: '2025-05-28T14:02:45',
-            coverImageUrl: 'url'
+            coverImageUrl: 'https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788975044946.jpg'
           }
         ]
       }
@@ -97,7 +97,7 @@ export const handlers = [
         content: '이 책의 본문 내용이 여기에 들어갑니다.…',
         createdAt: '2025-05-29T10:15:30',
         updatedAt: '2025-06-01T14:20:00',
-        coverImageUrl: 'https://example.com/images/cover/1.jpg'
+        coverImageUrl: 'https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788975044946.jpg'
       }
     })
   }),
@@ -190,7 +190,7 @@ export const handlers = [
       isSuccess: true,
       message: '성공입니다.',
       result: {
-        coverImageUrl: 'url'
+        coverImageUrl: 'https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788975044946.jpg'
       }
     })
   }),
@@ -215,7 +215,7 @@ export const handlers = [
         title: '검색된 책 제목',
         bookId: 1,
         createdAt: '2025-05-29T10:15:30',
-        coverImageUrl: 'url'
+        coverImageUrl: 'https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788975044946.jpg'
       }
     })
   })
