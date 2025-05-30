@@ -3,6 +3,7 @@ import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import {authApi} from '../api/auth'
 import {login} from '../store/authSlice'
+import emptyCover from '../assets/empty_cover.png'
 import {
   Container,
   Typography,
@@ -44,13 +45,14 @@ function Login() {
   return (
     <Container maxWidth="xs">
       <Box sx={{ mt: 8, textAlign: 'center' }}>   
+        <img src={emptyCover} alt="로고" width={100} height={100} />
         <Typography variant="h5" mt={2}>내 책 리스트</Typography>
         <Typography color="textSecondary" mb={3}>다시 오신 것을 환영합니다</Typography>
         <form onSubmit={handleSubmit}>
           <TextField
             fullWidth
-            label="이메일"
-            placeholder="example@email.com"
+            label="아이디"
+            placeholder="영문, 숫자 4-20자"
             margin="normal"
             value={loginId}
             onChange={(e) => setLoginId(e.target.value)}
