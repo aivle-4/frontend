@@ -15,6 +15,7 @@ import CardActionArea from '@mui/material/CardActionArea';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
+import emptyCover from '../assets/empty_cover.png'
 
 function Home() {
   const dispatch = useDispatch()
@@ -23,6 +24,8 @@ function Home() {
   const [books, setBooks] = useState([]);
   const [title, setTitle] = useState('');
 
+
+  // state settings
   const fetchBooks = async(searchTitle = '') => {
       try{
         const response = await booksApi.getBooks(searchTitle);
@@ -54,7 +57,7 @@ function Home() {
         padding: "20px"
         }}><h1>내 책 목록</h1>
 
-        <Button variant = "outlined" color = 'grey' style={{
+        <Button variant = "outlined" color = "grey" style={{
           position: "absolute",
           right: "5px",
           top: "10%",
@@ -69,7 +72,7 @@ function Home() {
 
 
       <div style={{
-        marginBottom: '30px',
+        marginBottom: "30px",
         display: "flex",
         width: "100%"
         }}><input 
@@ -86,11 +89,11 @@ function Home() {
           }}
 
           style={{
-            borderRadius: '6px',
+            borderRadius: "6px",
             flex: 4,
-            padding: '8px',
-            fontSize: '14px',
-            marginRight: '10px'
+            padding: "8px",
+            fontSize: "14px",
+            marginRight: "10px"
           }}>
         </input>
         
@@ -103,33 +106,39 @@ function Home() {
       <div style={{
         flex: 1,
         display: "flex",
-        flexWrap: 'wrap',
-        gap: '16px'
+        flexWrap: "wrap",
+        gap: "16px"
       }}>
         
         {books.map((book) => (
-          <Card key={book.bookId}>
+          <Card key = {book.bookId} sx={{ maxWidth: 350 }}>
             <CardActionArea
             onClick={() => {
               navigate('/{book.bookId}')
             }}>
               <CardMedia
-                component= "img"
-                height= "140"
+                component = "img"
+                height = "140"
                 image = {book.coverImageUrl}
                 alt = {book.title}
+
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = emptyCover
+                }}
               />
               <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant = "h5" component = "div">
                   <strong>{book.title}</strong>
                 </Typography>
 
-                <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
+                <Typography variant = "subtitle2" sx = {{ color: 'text.secondary' }}>
+                  <p></p>
                   {book.author}
                 </Typography>
 
-                <Typography variant="body2" sx={{ color: 'text.secondary' }} fontSize="10px">
-                  {book.createdAt.split("T")[0].replaceAll('-', '.')}
+                <Typography variant = "body2" sx = {{ color: 'text.secondary' }} fontSize = "10px">
+                  {book.createdAt.split('T')[0].replaceAll('-', '.')}
                 </Typography>
               </CardContent>
             </CardActionArea>
