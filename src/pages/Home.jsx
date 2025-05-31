@@ -1,71 +1,40 @@
+// REACT
 import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
+import {useEffect, useState} from 'react';
+
+// API settings
 import {logout} from '../store/authSlice'
 import {booksApi} from '../api/books'
 
+// MUI
 import Button from '@mui/material/Button';
-
-import {useEffect, useState} from 'react';
-
-
-// const dummyBooks = [
-//   {
-//     id: 1,
-//     title: '1984',
-//     author: '조지 오웰',
-//     category: '소설',
-//     createdAt: '2023.1.15',
-//     coverImageUrl: '../ni.png'
-//   },
-//   {
-//     id: 2,
-//     title: '사피엔스',
-//     author: '유발 하라리',
-//     category: '역사',
-//     createdAt: '2023.1.15',
-//     coverImageUrl: '../ni.png'
-//   },
-//   {
-//     id: 3,
-//     title: '미드나잇 라이브러리',
-//     author: '매트 헤이그',
-//     category: '소설',
-//     createdAt: '2023.1.15',
-//     coverImageUrl: '../ni.png'
-//   },
-//   {
-//     id: 4,
-//     title: '총, 균, 쇠',
-//     author: '재레드 다이아몬드',
-//     category: '역사',
-//     createdAt: '2023.1.15',
-//     coverImageUrl: '../ni.png'
-//   },
-//   {
-//     id: 5,
-//     title: '부자 아빠 가난한 아빠',
-//     author: '로버트 기요사키',
-//     category: '경제',
-//     createdAt: '2023.1.15',
-//     coverImageUrl: '../ni.png'
-//   }
-// ];
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardActionArea from '@mui/material/CardActionArea';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
 
 
 function Home() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-
   const [books, setBooks] = useState([]);
   const [title, setTitle] = useState('');
 
-
-  const fetchBooks = async() => {
+  const fetchBooks = async(searchTitle = '') => {
       try{
-        const response = await booksApi.getBooks(title);
-        setBooks(response.data.result);
+        const response = await booksApi.getBooks(searchTitle);
+        let results = response.data.result;
 
+        if(searchTitle.trim() !== ''){
+          results = results.filter(book =>
+            book.title.includes(searchTitle.trim())
+          );
+        }
+
+        setBooks(results);
       } catch(error){
           console.error('책 불러오기 실패 :', error);
       }
@@ -77,13 +46,6 @@ function Home() {
       }, []);
 
 
-  // test
-  // useEffect(() => {
-  //   dummyBooks;
-  //   setBooks(dummyBooks);
-  // }, []);
-
-
   return (
     <div>
       <div style={{
@@ -92,23 +54,24 @@ function Home() {
         padding: "20px"
         }}><h1>내 책 목록</h1>
 
-        <Button variant = "contained" style={{
+        <Button variant = "outlined" color = 'grey' style={{
           position: "absolute",
-          right: "20px",
-          top: "50%",
+          right: "5px",
+          top: "10%",
           transform: "translateY(-50%)",
           fontSize: "10px"
         }} onClick={() => {
           dispatch(logout())
           navigate('/login')
-        }}>로그아웃
+        }}>로그아웃 ⤷
         </Button>
       </div>
 
 
       <div style={{
-        marginBottom: '20px',
-        display: "flex"
+        marginBottom: '30px',
+        display: "flex",
+        width: "100%"
         }}><input 
           type = "text"
           placeholder = "책 제목으로 검색..." 
@@ -116,60 +79,66 @@ function Home() {
           onChange = {(e) => setTitle(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === "Enter"){
-              fetchBooks();
+              console.log(e.target.value);
+              e.preventDefault();
+              fetchBooks(title);
             }
           }}
 
           style={{
+            borderRadius: '6px',
+            flex: 4,
             padding: '8px',
             fontSize: '14px',
-            width: '200px',
             marginRight: '10px'
           }}>
         </input>
         
         <Button variant = "contained" onClick={() => {
-          navigate('/register')
+          navigate('/write')
           }}>책 추가
         </Button>
       </div>
       
       <div style={{
+        flex: 1,
         display: "flex",
         flexWrap: 'wrap',
         gap: '16px'
       }}>
+        
         {books.map((book) => (
-          <div key={book.bookId} style={{
-            border: "1px solid black",
-            margin: "10px",
-            padding: "10px",
-            borderRadius: "10px"
-          }}>
+          <Card key={book.bookId}>
+            <CardActionArea
+            onClick={() => {
+              navigate('/{book.bookId}')
+            }}>
+              <CardMedia
+                component= "img"
+                height= "140"
+                image = {book.coverImageUrl}
+                alt = {book.title}
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                  <strong>{book.title}</strong>
+                </Typography>
 
-            {/* <img
-              src={book.coverImageUrl}
-              alt={`${book.title} 표지`}
-            ></img> */}
+                <Typography variant="subtitle2" sx={{ color: 'text.secondary' }}>
+                  {book.author}
+                </Typography>
 
-            <strong><p style={{
-              fontSize: "25px"
-            }}>{book.title}</p></strong>
-            
-            <p style={{
-              fontSize: "12px"
-            }}>{book.author}</p>
-            
-            <p style={{
-              fontSize: "5px"
-            }}>{book.createdAt}</p>
-          </div>
+                <Typography variant="body2" sx={{ color: 'text.secondary' }} fontSize="10px">
+                  {book.createdAt.split("T")[0].replaceAll('-', '.')}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
           ))
         }
       </div>
-
     </div>
   )
 }
 
-export default Home 
+export default Home
