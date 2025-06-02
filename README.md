@@ -8,6 +8,10 @@
 - store : 상태 관리 (Redux toolkit)   
 </br>
 
+# 다이어그램
+![프론트엔드 다이어그램](.\docs\프론트엔드_다이어그램.png)
+
+
 # 소스코드 세부내용
 
 ## src/App.jsx
