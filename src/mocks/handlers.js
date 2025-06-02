@@ -77,6 +77,13 @@ export const handlers = [
         result: null
       }, {status: 400})
     }
+    //
+    // // 401 에러 리턴
+    // return HttpResponse.json({
+    //   isSuccess: false,
+    //   message: '인증이 필요합니다.',
+    //   result: null
+    // }, {status: 401})
 
     return HttpResponse.json({
       isSuccess: true,
