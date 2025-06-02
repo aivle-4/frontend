@@ -44,38 +44,27 @@ export const handlers = [
 
   // 책 목록 조회
   http.get('/api/books', ({request}) => {
-    const url = new URL(request.url)
-    const title = url.searchParams.get('title')
 
-    if (!title) {
-      return HttpResponse.json({
-        isSuccess: false,
-        message: '제목을 입력해주세요.',
-        result: null
-      }, {status: 400})
-    }
 
     return HttpResponse.json({
       isSuccess: true,
       message: '성공입니다.',
-      result: {
-        books: [
-          {
-            bookId: 1,
-            title: '토지',
-            author: '작가1',
-            createdAt: '2025-05-29T10:15:30',
-            coverImageUrl: 'https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788975044946.jpg'
-          },
-          {
-            bookId: 2,
-            title: '백설공주',
-            author: '작가2',
-            createdAt: '2025-05-28T14:02:45',
-            coverImageUrl: 'https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788975044946.jpg'
-          }
-        ]
-      }
+      result: [
+        {
+          bookId: 1,
+          title: '토지',
+          author: '작가1',
+          createdAt: '2025-05-29T10:15:30',
+          coverImageUrl: 'https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788975044946.jpg'
+        },
+        {
+          bookId: 2,
+          title: '백설공주',
+          author: '작가2',
+          createdAt: '2025-05-28T14:02:45',
+          coverImageUrl: 'https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788975044946.jpg'
+        }
+      ]
     })
   }),
 
