@@ -51,25 +51,38 @@ function Home() {
 
   return (
     <div>
-      <div style={{
-        position: "relative",
-        textAlign: "center",
-        padding: "20px"
-        }}><h1>내 책 목록</h1>
+      <div
+        style={{
+          width: "100%",
+          height: "60px",
+          backgroundColor: "#007BFF",
+          position: "relative",
+          display: "flex",
+          justifyContent: "flex-end",
+          alignItems: "center",
+          paddingRight: "20px"
+        }}
+      ><Button
+          variant="outlined"
+          style={{
+            fontSize: "12px",
+            borderColor: "white",
+            color: "white"
+          }}
 
-        <Button variant = "outlined" color = "grey" style={{
-          position: "absolute",
-          right: "5px",
-          top: "10%",
-          transform: "translateY(-50%)",
-          fontSize: "10px"
-        }} onClick={() => {
-          dispatch(logout())
-          navigate('/login')
-        }}>로그아웃 ⤷
+          onClick={() => {
+            dispatch(logout());
+            navigate("/login");
+          }}
+        >로그아웃 ⤷
         </Button>
       </div>
 
+      <div style={{
+        textAlign: "center", 
+        padding: "20px" 
+        }}><h1>내 책 목록</h1>
+      </div>
 
       <div style={{
         marginBottom: "30px",
