@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useParams, useNavigate} from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -9,12 +9,12 @@ import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import empytyCover from "../assets/empty_cover.png";
-import { booksApi } from "../api/books";
+import {booksApi} from "../api/books";
 import Typography from "@mui/material/Typography";
 
 
 const BookDetail = () => {
-  const {id:bookId} = useParams();
+  const {id: bookId} = useParams();
   const [bookDetail, setBookDetail] = useState();
 
   useEffect(() => {
@@ -32,12 +32,12 @@ const BookDetail = () => {
 
   return (
     <React.Fragment>
-      <CssBaseline />
+      <CssBaseline/>
       <Container maxWidth="lg">
-        <BookDetailHeader book={bookDetail} />
-        <Box sx={{ minHeight: '100vh', backgroundColor: '#fff', padding: 2 }}>
+        <BookDetailHeader book={bookDetail}/>
+        <Box sx={{minHeight: '100vh', backgroundColor: '#fff', padding: 2}}>
           <BookOverview book={bookDetail}></BookOverview>
-          <BookContent book={bookDetail} />
+          <BookContent book={bookDetail}/>
         </Box>
       </Container>
     </React.Fragment>
@@ -46,10 +46,10 @@ const BookDetail = () => {
 
 const BookDetailHeader = ({book}) => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar sx={{ boxShadow: 1, bgcolor: '#fff', color: '#222', boderBottom:  '1px solid #eee'}} position="sticky">
-        <Toolbar sx={{ position: "relative" }}>
-          <GoBackButton />
+    <Box sx={{flexGrow: 1}}>
+      <AppBar sx={{boxShadow: 1, bgcolor: '#fff', color: '#222', boderBottom: '1px solid #eee'}} position="sticky">
+        <Toolbar sx={{position: "relative"}}>
+          <GoBackButton/>
           <Typography
             variant="h6"
             component="div"
@@ -65,9 +65,9 @@ const BookDetailHeader = ({book}) => {
           >
             {!book ? "hello" : book.title}
           </Typography>
-          <Box sx={{ marginLeft: "auto", display: "flex", gap: 1 }}>
-            {!book ? "" : <EditButton bookId={book.bookId} />}
-            {!book ? "" : <DeleteButton bookId={book.bookId} />}
+          <Box sx={{marginLeft: "auto", display: "flex", gap: 1}}>
+            {!book ? "" : <EditButton bookId={book.bookId}/>}
+            {!book ? "" : <DeleteButton bookId={book.bookId}/>}
           </Box>
         </Toolbar>
       </AppBar>
@@ -80,20 +80,20 @@ const GoBackButton = () => {
   return (
     <Button
       variant="contained"
-      startIcon={<ArrowBackIcon />}
+      startIcon={<ArrowBackIcon/>}
       size="large"
       edge="start"
       aria-label="go back"
       sx={{
         bgcolor: '#fff',         // 배경 흰색
-        color: '#222', 
+        color: '#222',
         fontWeight: 600,
         fontSize: '1rem',
         px: 1.5,
         py: 1,
         border: '1px solid #eee',
         borderRadius: 2,
-        boxShadow: 3,  
+        boxShadow: 3,
         textTransform: 'none',
         '&:hover': {
           backgroundColor: '#f5f5f5',
@@ -113,7 +113,7 @@ const EditButton = ({bookId}) => {
       variant="outlined"
       color="inherit"
       size="large"
-      sx = {{
+      sx={{
         borderColor: '#1976d2',
         color: '#1976d2',
         '&:hover': {
@@ -124,7 +124,7 @@ const EditButton = ({bookId}) => {
       }}
       onClick={() => navigate(`/${bookId}/edit`)}
     >
-    수정
+      수정
     </Button>
   );
 }
@@ -167,12 +167,12 @@ const DeleteButton = ({bookId}) => {
 
 const BookContent = ({book}) => {
   return (
-    <Box sx={{ padding: 2, border: '1px solid #ccc', borderRadius: 2, width: '100%' }}>
-      <Typography gutterBottom variant="h5" component="div" sx={{ fontWeight: 'bold' }}>
+    <Box sx={{padding: 2, border: '1px solid #ccc', borderRadius: 2, width: '100%'}}>
+      <Typography gutterBottom variant="h5" component="div" sx={{fontWeight: 'bold'}}>
         책 내용
       </Typography>
       <Typography variant="body2">
-          {book ? book.content : "책 로드 중..."}
+        {book ? book.content : "책 로드 중..."}
       </Typography>
     </Box>
   );
@@ -181,29 +181,29 @@ const BookContent = ({book}) => {
 const BookOverview = ({book}) => {
   return (
     !book ? <p>Loading...</p> :
-    // Display book details
-    <Box sx={{ padding: 2, border: '1px solid #ccc', borderRadius: 2, width: '100%' }}>
-      <Grid
-        container
-        spacing={2}
-        sx={{ width: '100%', gap: 5 }} // gap 추가
-      >
-        <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <Box
-            component="img"
-            src={empytyCover}
-            alt={book.title}
-            sx={{ width: '100%', maxWidth: 300, borderRadius: 2, boxShadow: 2 }}
-          />
+      // Display book details
+      <Box sx={{padding: 2, border: '1px solid #ccc', borderRadius: 2, width: '100%'}}>
+        <Grid
+          container
+          spacing={2}
+          sx={{width: '100%', gap: 5}} // gap 추가
+        >
+          <Grid item xs={12} md={4} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <Box
+              component="img"
+              src={book.coverImageUrl ?? empytyCover}
+              alt={book.title}
+              sx={{width: '100%', maxWidth: 300, borderRadius: 2, boxShadow: 2}}
+            />
+          </Grid>
+          <Grid item xs={12} md={8}>
+            <h2>{book.title}</h2>
+            <p>저자: {book.author}</p>
+            <p>등록일: {book.createdAt} 최종 수정: {book.updatedAt}</p>
+            <p>{book.description}</p>
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={8}>
-          <h2>{book.title}</h2>
-          <p>저자: {book.author}</p>
-          <p>등록일: {book.createdAt}   최종 수정: {book.updatedAt}</p>
-          <p>{book.description}</p>
-        </Grid>
-      </Grid>
-    </Box>
+      </Box>
   );
 }
 
