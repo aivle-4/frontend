@@ -18,7 +18,6 @@
 - 프로젝트의 진입점
 - 개발 환경(env.DEV)에서 Mock Service Worker를 실행하고, ReactDOM을 통해 App 렌더링
 </br>
-</br>
 
 ## src/routes 디렉토리
 
@@ -26,7 +25,6 @@
 - 모든 페이지 라우팅 정의
 - 로그인/회원가입/도서 전체 목록(홈)/도서 상세정보/도서 추가/도서 수정과 같은 주요 페이지 라우팅
 - 로그인과 같이 인증이 필요한 경로는 ProtectedRoute로 보호
-</br>
 </br>
 
 ## src/pages 디렉토리
@@ -47,7 +45,6 @@
 - 도서 추가 및 수정 폼 페이지
 - 도서 표지 이미지 생성, 입력값 관리, 도서 등록 및 수정 API 연동
 </br>
-</br>
 
 ## src/api 디렉토리
 
@@ -60,13 +57,11 @@
 ## books.js
 - 도서 처리(CRUD) API 요청 함수 정의
 </br>
-</br>
 
 ## src/store 디렉토리
 
 ### authSlice.js & store.js
 - Redux Toolkit을 이용한 사용자 인증 상태 관리 및 스토어 설정
-</br>
 </br>
 
 ## src/mocks 디렉토리
@@ -74,7 +69,6 @@
 ### handlers.js & browser.js
 - Mock Service Worker 핸들러 및 Worker 설정
 - 개발 환경에서 API 요청을 mock 데이터로 응답하도록 설정
-</br>
 </br>
 
 ## src/components 디렉토리  
