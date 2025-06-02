@@ -22,30 +22,28 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-    const response = await authApi.login({ loginId, password })
-    
-    if (response?.data?.isSuccess) {
-      const memberId = response.data.result.memberId
+      const response = await authApi.login({loginId, password})
+      if (response?.data) {
+        const {isSuccess, result} = response.data
+        if (isSuccess && result?.accessToken) {
+          dispatch(login(
+            {token: result.accessToken}
+          ))
+        }
 
-      dispatch(login({
-        token: memberId
-      }))
 
-      // token에 memberId 저장
-      localStorage.setItem('token', memberId)
-
-      navigate('/')
+        navigate('/')
+      }
+    } catch (error) {
+      console.error('로그인 실패:', error)
+      alert('로그인에 실패했습니다.')
     }
-  } catch (error) {
-    console.error('로그인 실패:', error)
-    alert('로그인에 실패했습니다.')
-  }
   }
 
   return (
     <Container maxWidth="xs">
-      <Box sx={{ mt: 8, textAlign: 'center' }}>   
-        <img src={emptyCover} alt="로고" width={100} height={100} />
+      <Box sx={{mt: 8, textAlign: 'center'}}>
+        <img src={emptyCover} alt="로고" width={100} height={100}/>
         <Typography variant="h5" mt={2}>내 책 리스트</Typography>
         <Typography color="textSecondary" mb={3}>다시 오신 것을 환영합니다</Typography>
         <form onSubmit={handleSubmit}>
@@ -70,7 +68,7 @@ function Login() {
             fullWidth
             variant="contained"
             type="submit"
-            sx={{ mt: 2 }}
+            sx={{mt: 2}}
           >
             로그인
           </Button>

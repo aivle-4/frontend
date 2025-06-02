@@ -1,4 +1,4 @@
-import { http, HttpResponse } from 'msw'
+import {http, HttpResponse} from 'msw'
 
 export const handlers = [
   // 회원가입
@@ -35,7 +35,9 @@ export const handlers = [
       isSuccess: true,
       message: '성공입니다.',
       result: {
-        memberId: 1
+        memberId: 1,
+        type: 'Bearer',
+        accessToken: 'asc'
       }
     })
   }),
