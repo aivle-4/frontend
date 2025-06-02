@@ -8,7 +8,7 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import empytyCover from "../assets/empty_cover.png";
+import emptyCover from "../assets/empty_cover.png";
 import { booksApi } from "../api/books";
 import Typography from "@mui/material/Typography";
 
@@ -191,7 +191,7 @@ const BookOverview = ({book}) => {
         <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Box
             component="img"
-            src={book.coverImageUrl}
+            src={book.coverImageUrl ? book.coverImageUrl : emptyCover}
             alt={book.title}
             sx={{ width: '100%', maxWidth: 300, borderRadius: 2, boxShadow: 2 }}
 
