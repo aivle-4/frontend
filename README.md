@@ -8,7 +8,7 @@
 - store : 상태 관리 (Redux toolkit)   
 </br>
 
-# 소스코드 세부 내용
+# 소스코드 세부내용
 
 ## src/App.jsx
 - 애플리케이션 루트 컴포넌트
