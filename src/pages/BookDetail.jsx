@@ -191,9 +191,14 @@ const BookOverview = ({book}) => {
         <Grid item xs={12} md={4} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Box
             component="img"
-            src={empytyCover}
+            src={book.coverImageUrl}
             alt={book.title}
             sx={{ width: '100%', maxWidth: 300, borderRadius: 2, boxShadow: 2 }}
+
+            onError={(e) => {
+              e.target.onerror = null
+              e.target.src = empytyCover;
+            }}
           />
         </Grid>
         <Grid item xs={12} md={8}>
