@@ -114,7 +114,7 @@ function Home() {
           <Card key = {book.bookId} sx={{ maxWidth: 350 }}>
             <CardActionArea
             onClick={() => {
-              navigate('/{book.bookId}')
+              navigate(`/${book.bookId}`)
             }}>
               <CardMedia
                 component = "img"
